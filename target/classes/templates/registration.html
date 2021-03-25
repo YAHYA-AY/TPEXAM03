@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+      
+<head>
+	<title>Registration</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Registration and
+					Login Module</a>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<br>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-md-offset-3">
+
+				<div th:if="${param.success}">
+					<div class="alert alert-info">You've successfully registered
+						to our awesome app!</div>
+				</div>
+
+				
+				<form th:action="@{/registration}" th:object="${user}" method="post" class="form-signin">
+				
+					<h1>Registration</h1><br>
+					
+					<p class="error-message" th:if="${#fields.hasGlobalErrors()}"
+						th:each="error : ${#fields.errors('global')}" th:text="${error}">Validation
+						error</p>
+
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('nom')}? 'has-error':''">
+						<label for="nom" class="control-label">Nom</label><br>
+					    <input id="nom" class="form-control" th:field="*{nom}" />
+						<p class="error-message"
+							th:each="error: ${#fields.errors('nom')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('prenom')}? 'has-error':''">
+						<label for="prenom" class="control-label">Prénom</label><br>
+					    <input id="prenom" class="form-control" th:field="*{prenom}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('prenom')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('adresse')}? 'has-error':''">
+						<label for="adresse" class="control-label">Adresse</label><br>
+					    <input id="adresse" class="form-control" th:field="*{adresse}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('adresse')}"
+							th:text="${error}">Validation error</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('ville')}? 'has-error':''">
+						<label for="ville" class="control-label">Ville</label><br>
+						<input id="ville" class="form-control" th:field="*{ville}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('ville')}"
+							th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('tel')}? 'has-error':''">
+						<label for="tel" class="control-label">Téléphone</label><br>
+						<input id="tel" class="form-control" th:field="*{tel}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('tel')}"  
+							th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('username')}? 'has-error':''">
+						<label for="username" class="control-label">E-mail</label><br>
+						<input id="username" class="form-control" th:field="*{username}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('username')}" th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+						<label for="password" class="control-label">Password</label><br> 
+						<input id="password" class="form-control" type="password"
+							th:field="*{password}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('password')}"
+							th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('confirmPassword')}? 'has-error':''">
+						<label for="confirmPassword" class="control-label">Confirmer le mot de passe</label><br> 
+						<input id="confirmPassword" class="form-control"
+							type="password" th:field="*{confirmPassword}" />
+						<p class="error-message"
+							th:each="error : ${#fields.errors('confirmPassword')}"
+							th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group"
+						th:classappend="${#fields.hasErrors('terms')}? 'has-error':''">
+						<input id="terms" type="checkbox" th:field="*{terms}" />
+						   <label
+							class="control-label" for="terms"> I agree with the 
+							<a href="#">terms and conditions</a> for Registration.
+						</label>
+						<p class="error-message"
+							th:each="error : ${#fields.errors('terms')}" th:text="${error}">Validation error
+						</p>
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-success">S'enregistrer</button><br>
+						<span>Already registered? <a href="/" th:href="@{/login}">S'authentifier here</a> </span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
